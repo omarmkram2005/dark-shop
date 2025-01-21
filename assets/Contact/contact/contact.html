@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+
+    <title>Contact Us</title>
+  </head>
+  <body class="relative">
+    <!-- load screen -->
+    <div
+      id="load"
+      class="load-screen flex items-center transition-all duration-200 w-[100%] h-[100%] z-[9998] fixed top-0 left-0 bg-[#2e2d2d]">
+      <div class="w-full h-fit my-auto mx-0 flex justify-center">
+        <div class="spinner w-16 rounded-full h-16"></div>
+      </div>
+    </div>
+
+    <!-- start nav bar -->
+    <nav class="h-fit top-0" style="background-color: #171717">
+      <!-- the container -->
+
+      <div
+        class="container flex items-center pt-[30px] pb-[30px] justify-between"
+        style="height: 50px">
+        <!-- the logo div -->
+
+        <div class="logo h-6">
+          <img class="h-6" src="../../engage-shop-elegant-light.png" alt="" />
+        </div>
+
+        <!-- holder for all nav items -->
+
+        <div class="links-holder flex flex-row-reverse">
+          <!-- handel mobile menu state animations and transitions -->
+          <div
+            class="list-menu pl-4 cursor-pointer w-5"
+            id="mobile-menu"
+            onclick="mobileMenu()">
+            <svg
+              class="fill-slate-300 transition-all top-[13px] duration-200 absolute"
+              width="35"
+              height="39"
+              id="open-menu"
+              clip-rule="evenodd"
+              fill-rule="evenodd"
+              stroke-linejoin="round"
+              stroke-miterlimit="2"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m22 16.75c0-.414-.336-.75-.75-.75h-18.5c-.414 0-.75.336-.75.75s.336.75.75.75h18.5c.414 0 .75-.336.75-.75zm0-5c0-.414-.336-.75-.75-.75h-18.5c-.414 0-.75.336-.75.75s.336.75.75.75h18.5c.414 0 .75-.336.75-.75zm0-5c0-.414-.336-.75-.75-.75h-18.5c-.414 0-.75.336-.75.75s.336.75.75.75h18.5c.414 0 .75-.336.75-.75z"
+                fill-rule="nonzero" />
+            </svg>
+
+            <svg
+              class="fill-slate-300 top-[13px] transition-all duration-200 absolute"
+              id="close-menu"
+              style="transform: rotatex(90deg)"
+              width="35"
+              height="39"
+              clip-rule="evenodd"
+              fill-rule="evenodd"
+              stroke-linejoin="round"
+              stroke-miterlimit="2"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m12 10.93 5.719-5.72c.146-.146.339-.219.531-.219.404 0 .75.324.75.749 0 .193-.073.385-.219.532l-5.72 5.719 5.719 5.719c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.385-.073-.531-.219l-5.719-5.719-5.719 5.719c-.146.146-.339.219-.531.219-.401 0-.75-.323-.75-.75 0-.192.073-.384.22-.531l5.719-5.719-5.72-5.719c-.146-.147-.219-.339-.219-.532 0-.425.346-.749.75-.749.192 0 .385.073.531.219z" />
+            </svg>
+          </div>
+
+          <!-- handel  search and cart  -->
+          <div class="search cart flex cursor-pointer">
+            <div id="cart_handler" class="cart-holder relative mr-4">
+              <svg
+                id="cart"
+                class="relative fill-slate-300"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="30"
+                viewBox="0 0 24 24">
+                <path
+                  d="M20 7h-4v-3c0-2.209-1.791-4-4-4s-4 1.791-4 4v3h-4l-2 17h20l-2-17zm-11-3c0-1.654 1.346-3 3-3s3 1.346 3 3v3h-6v-3zm-4.751 18l1.529-13h2.222v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h6v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h2.222l1.529 13h-15.502z" />
+
+                <span
+                  id="amountBg"
+                  class="hidden text-white absolute bg-[#3ea8e6] w-5 h-5 rounded-full text-[19px] items-center justify-center top-[-8px] left-6">
+                  <span
+                    id="show-amount"
+                    style="
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%) scale(0.85);
+                    ">
+                    0
+                  </span>
+                </span>
+              </svg>
+              <ul
+                id="cart-menu"
+                class="transition-all hidden opacity-0 duration-700 z-[999999999999] bg-[#212121] rounded-lg pt-4 pb-6 px-5 w-[220px] text-nowrap text-xs unset absolute right-[-237%]"></ul>
+            </div>
+            <svg
+              class="fill-slate-200 pr-1"
+              id="search "
+              onclick="searchPros()"
+              width="41"
+              height="31"
+              clip-rule="evenodd"
+              fill-rule="evenodd"
+              stroke-linejoin="round"
+              stroke-miterlimit="2"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m15.97 17.031c-1.479 1.238-3.384 1.985-5.461 1.985-4.697 0-8.509-3.812-8.509-8.508s3.812-8.508 8.509-8.508c4.695 0 8.508 3.812 8.508 8.508 0 2.078-.747 3.984-1.985 5.461l4.749 4.75c.146.146.219.338.219.531 0 .587-.537.75-.75.75-.192 0-.384-.073-.531-.22zm-5.461-13.53c-3.868 0-7.007 3.14-7.007 7.007s3.139 7.007 7.007 7.007c3.866 0 7.007-3.14 7.007-7.007s-3.141-7.007-7.007-7.007z"
+                fill-rule="nonzero" />
+            </svg>
+            <!-- large screens nav -->
+          </div>
+          <ul id="lg-nav" class="links pr-4 items-center">
+            <li class="link pl-4 cursor-pointer relative" id="list_home">
+              <a href="../../../index.html">Home</a>
+              <ul
+                class="flex-col p-0 bg-[#262626] absolute rounded-md transition-all duration-700"
+                style="width: 180px; left: 0; display: none; opacity: 0"
+                id="list-home">
+                <li
+                  class="py-3 pl-[18px]"
+                  style="border-bottom: #606060 1px solid">
+                  <a class="decoration-0 text-xs" href="../../../index.html"
+                    >Home 1</a
+                  >
+                </li>
+                <li
+                  class="py-3 pl-[18px]"
+                  style="border-bottom: #606060 1px solid">
+                  <a
+                    class="decoration-0 text-xs"
+                    href="../../home/home2/home2.html"
+                    >Home 2</a
+                  >
+                </li>
+                <li
+                  class="py-3 pl-[18px]"
+                  style="border-bottom: #606060 1px solid">
+                  <a
+                    class="decoration-0 text-xs"
+                    href="../../home/home3/home3.html"
+                    >Home 3</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="link pl-4 cursor-pointer relative" id="list_shop">
+              <a href="../../shop/shop1/shop1.html">Shop</a>
+              <ul
+                class="flex-col p-0 bg-[#262626] absolute rounded-md transition-all duration-700"
+                style="width: 180px; left: 0; display: none; opacity: 0"
+                id="list-shop">
+                <li
+                  class="py-3 pl-[18px]"
+                  style="border-bottom: #606060 1px solid">
+                  <a
+                    class="decoration-0 text-xs"
+                    href="../../shop/shop1/shop1.html"
+                    >Shop with Sidebar</a
+                  >
+                </li>
+                <li
+                  class="py-3 pl-[18px]"
+                  style="border-bottom: #606060 1px solid">
+                  <a
+                    class="decoration-0 text-xs"
+                    href="../../shop/shop full width/shop full width.html"
+                    >Shop Fullwidth</a
+                  >
+                </li>
+                <li
+                  class="py-3 pl-[18px]"
+                  style="border-bottom: #606060 1px solid">
+                  <a
+                    class="decoration-0 text-xs"
+                    href="../../shop/shop one item/shop one item.html"
+                    >Single Product</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="link pl-4 cursor-pointer">
+              <a href="../../about/about/about.html">About</a>
+            </li>
+            <li class="link pl-4 cursor-pointer"><a href="#">Blog</a></li>
+            <li class="link pl-4 cursor-pointer">
+              <a href="../../Contact/contact/contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- mobile nav -->
+    <ul
+      id="mobile-nav"
+      class="links cursor-pointer bg-white hidden flex-col transition-all duration-500 px-3 overflow-hidden"
+      style="height: 0">
+      <li
+        class="link text-[#606060] h-[50px]"
+        onclick="mobileMenuSideSlider()"
+        id="homeItem">
+        <span id="spanHome">Home</span
+        ><i
+          class="fa-solid fa-chevron-right transition-all duration-300 text-sm"
+          id="arrow1"></i>
+      </li>
+      <ul
+        class="flex-col pl-4 overflow-hidden transition-all duration-300"
+        style="height: 0"
+        id="list1">
+        <li>
+          <a
+            class="decoration-0 text-sm text-[#606060]"
+            href="../../../index.html"
+            >Home 1</a
+          >
+        </li>
+        <li>
+          <a
+            class="decoration-0 text-sm text-[#606060]"
+            href="../../home/home2/home2.html"
+            >Home 2</a
+          >
+        </li>
+        <li style="border-bottom: #606060 1px solid">
+          <a
+            class="decoration-0 text-sm text-[#606060]"
+            href="../../home/home3/home3.html"
+            >Home 3</a
+          >
+        </li>
+      </ul>
+      <li
+        class="link text-[#606060] h-[50px]"
+        onclick="mobileMenuSideSlider()"
+        id="shopItem">
+        <span id="spanShop">Shop</span>
+        <i
+          class="fa-solid fa-chevron-right transition-all duration-300 text-sm"
+          id="arrow2">
+        </i>
+      </li>
+      <ul
+        class="flex-col pl-4 overflow-hidden transition-all duration-300"
+        style="height: 0"
+        id="list2">
+        <li>
+          <a
+            class="decoration-0 text-sm text-[#606060]"
+            href="../../shop/shop1/shop1.html"
+            >Shop with Sidebar</a
+          >
+        </li>
+        <li>
+          <a
+            class="decoration-0 text-sm text-[#606060]"
+            href="../../shop/shop full width/shop full width.html"
+            >Shop Fullwidth</a
+          >
+        </li>
+        <li style="border-bottom: #606060 1px solid">
+          <a
+            class="decoration-0 text-sm text-[#606060]"
+            href="../../shop/shop one item/shop one item.html"
+            >Single Product</a
+          >
+        </li>
+      </ul>
+      <li class="link text-[#606060] h-[50px]">
+        <a href="../../about/about/about.html">About</a>
+      </li>
+      <li class="link text-[#606060] h-[50px]"><a href="#">Blog</a></li>
+      <li class="link text-[#606060] h-[50px]">
+        <a href="../../Contact/contact/contact.html">Contact</a>
+      </li>
+    </ul>
+
+    <div class="contact-us">
+      <h1 class="text-white mx-auto w-fit text-4xl my-24">Keep In Touch!</h1>
+      <div class="email my-14">
+        <h2 class="text-white mx-auto w-fit text-3xl">Send a Email</h2>
+        <form
+          action="get"
+          class="form flex flex-wrap w-96 h-96 justify-between mx-auto my-12">
+          <input
+            type="text"
+            id="fname"
+            name="fname"
+            placeholder="First Name"
+            class="w-[45%] h-10 border-0 outline-none bg-[#292828] text-white placeholder:text-[#7a7878] px-2 py-1" />
+          <input
+            type="text"
+            id="lname"
+            name="lname"
+            placeholder="Last Name"
+            class="w-[45%] h-10 border-0 outline-none bg-[#292828] text-white placeholder:text-[#7a7878] px-2 py-1" />
+          <input
+            type="text"
+            id="phonN"
+            placeholder="Phone Numper"
+            class="w-[100%] h-10 border-0 outline-none bg-[#292828] text-white placeholder:text-[#7a7878] px-2 py-1" />
+          <input
+            type="email"
+            id="email"
+            placeholder="Your Email"
+            class="w-[100%] h-10 border-0 outline-none bg-[#292828] text-white placeholder:text-[#7a7878] px-2 py-1" />
+          <textarea
+            placeholder="Your massage"
+            class="w-full resize-none h-28 border-0 outline-none bg-[#292828] text-white placeholder:text-[#7a7878] px-2 py-1"
+            id="massage"></textarea>
+          <input
+            class="hover:bg-[#3b90ff] cursor-pointer transition-all duration-300 w-[100%] h-10 mt-6 border-0 outline-none bg-[#292828] text-white placeholder:text-[#7a7878] px-2 py-1"
+            value="Submet"
+            type="button"
+            onclick="window.location.assign(`../../../index.html`)"
+            id="submet" />
+        </form>
+      </div>
+      <h1 class="text-white mx-auto w-fit text-4xl">OR</h1>
+      <div class="live-site mt-16">
+        <h2 class="text-white mx-auto w-fit text-3xl">Visit Our Office</h2>
+        <div class="map w-full relative mt-12 hidden">
+          <div
+            class="overlay absolute top-0 left-0 bg-[#171717] w-full h-full"
+            style="opacity: 1; transition: opacity 0.6s"></div>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1500.2333982854682!2d-73.90968701670383!3d40.77643839926256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25f6798124c61%3A0x6e0b6269d12a3073!2sCreate!5e1!3m2!1sar!2seg!4v1736104486513!5m2!1sar!2seg"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            class="max-w-full w-full h-[450px]"></iframe>
+        </div>
+      </div>
+    </div>
+    <!-- start higher footer -->
+    <div class="h-footer bg-[#1c1c1c]">
+      <div class="container h-fit py-10 flex gap-[1.3%]">
+        <div class="col-1 px-[14px]">
+          <h2 class="text-white mb-4 text-lg">About us</h2>
+          <p class="text-[#797979] leading-6 text-sm pb-9">
+            I am text block. Click edit button to change this text. Lorem ipsum
+            dolor sit amet, consectetur. I am text block. Click edit button to
+            change this text. Lorem ipsum dolor sit amet, consectetur.
+          </p>
+          <p class="text-[#797979] leading-6 text-sm">
+            We are the champions! We are the most amazing theme of all time,
+            yeah.
+          </p>
+        </div>
+        <div class="col-2 px-[14px]">
+          <h2 class="text-white mb-4 text-lg">Opening Hours</h2>
+          <ul class="list Hours">
+            <li>Monday 10AM – 9PM</li>
+            <li>Tuesday 10AM – 9PM</li>
+            <li>Wednesday 10AM – 9PM</li>
+            <li>Thursday 10AM – 10PM</li>
+            <li>Friday 10AM – 10PM</li>
+            <li>Weekends 10AM – 11PM</li>
+          </ul>
+        </div>
+        <div class="col-3 px-[14px]">
+          <h2 class="text-white mb-4 text-lg">Top Rated Products</h2>
+
+          <div data-id="id001" class="row flex justify-between">
+            <span class="hidden" id="id001"></span>
+            <div class="info flex justify-around flex-col">
+              <h3 class="name mb-3">
+                <a
+                  class="text-[#A9A9A9] transition-all duration-500 hover:text-[#cac9c9]"
+                  href="#"
+                  >Basic Sandals</a
+                >
+              </h3>
+              <div class="rate text-xs mb-3">
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="far fa-star" style="color: #3ea8e6"></i>
+              </div>
+              <span class="text-[#797979]">£20.00</span>
+            </div>
+            <div class="image flex items-center w-16">
+              <img class="rounded" src="../imgs/images01 (1).jpg" alt="" />
+            </div>
+          </div>
+          <div data-id="id012" class="row flex justify-between">
+            <span class="hidden" id="id012"></span>
+            <div class="info flex justify-around flex-col">
+              <h3 class="name mb-3">
+                <a
+                  class="text-[#A9A9A9] transition-all duration-500 hover:text-[#cac9c9]"
+                  href="#"
+                  >Light Shoes
+                </a>
+              </h3>
+              <div class="rate text-xs mb-3">
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="far fa-star" style="color: #3ea8e6"></i>
+              </div>
+              <span class="text-[#797979]">£18.00</span>
+            </div>
+            <div class="image flex items-center w-16">
+              <img class="rounded" src="../imgs/images04.jpg" alt="" />
+            </div>
+          </div>
+          <div data-id="id014" class="row flex justify-between">
+            <span class="hidden" id="id014"></span>
+            <div class="info flex justify-around flex-col">
+              <h3 class="name mb-3">
+                <a
+                  class="text-[#A9A9A9] transition-all duration-500 hover:text-[#cac9c9]"
+                  href="#"
+                  >White Bag
+                </a>
+              </h3>
+              <div class="rate text-xs mb-3">
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+              </div>
+              <span class="text-[#797979]">£35.00</span>
+            </div>
+            <div class="image flex items-center w-16">
+              <img class="rounded" src="../imgs/images13.jpg" alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="col-4 px-[14px]">
+          <ul class="list cont">
+            <h2 class="text-white mb-4 text-lg">Contact Details</h2>
+            <li class="text-xs">
+              <i class="fas fa-map-marker-alt"></i>
+              Manchester Road 123-78B, Silictown 7854MD, Great Country
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <a
+                class="text-[#A9A9A9] transition-all duration-500 hover:text-[#cac9c9]"
+                href="#">
+                +46 123 456 789
+              </a>
+            </li>
+            <li class="email">
+              <i class="fas fa-envelope"></i>
+              <a
+                class="text-[#A9A9A9] transition-all duration-500 hover:text-[#cac9c9]"
+                href="mailto:hello@sitename.com"
+                >hello@sitename.com</a
+              >
+            </li>
+            <li class="globe">
+              <i class="fas fa-globe"></i>
+              <a
+                class="text-[#A9A9A9] transition-all duration-500 hover:text-[#cac9c9]"
+                href="#"
+                >http://www.sitename.com</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- end higher footer -->
+    <!-- start lower footer -->
+    <div class="l-footer bg-[#141414]">
+      <div
+        class="container h-fit py-[20px] flex gap-3 justify-between items-center">
+        <span class="text-[#777777] text-xs"
+          >Copyright 2024. All rights reserved.
+        </span>
+        <div
+          class="social flex gap-4 text-[#c3c3c3] justify-between items-center">
+          <div
+            class="bg-[#0e0d0d] hover:bg-[#1877F2] transition-all duration-500 rounded-full w-6 h-6 flex justify-center items-center">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+          </div>
+          <div
+            class="bg-[#0e0d0d] hover:bg-[#EA4335] transition-all duration-500 rounded-full w-6 h-6 flex justify-center items-center">
+            <a href="#"><i class="fab fa-google"></i></a>
+          </div>
+          <div
+            class="bg-[#0e0d0d] hover:bg-[#0A66C2] transition-all duration-500 rounded-full w-6 h-6 flex justify-center items-center">
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+          <div
+            class="bg-[#0e0d0d] hover:bg-[#1DA1F2] transition-all duration-500 rounded-full w-6 h-6 flex justify-center items-center">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end lower footer -->
+    <!-- jump to top button -->
+    <div
+      class="jump fixed right-2 duration-500 transition-all z-[1000] bottom-2 rounded-full">
+      <span
+        class="flex justify-center border cursor-pointer items-center rounded-full w-8 h-8 p-6 text-white text-xl -rotate-90 bg-[#0000005b]"
+        >></span
+      >
+    </div>
+
+    <!-- call tailwind -->
+    <script src="assets/tailwind.config.js"></script>
+    <script src="script.js"></script>
+  </body>
+  <script>
+    window.onload = function () {
+      let loadSc = document.getElementById("load");
+      if (window.localStorage.getItem("inCart")) {
+        addButtons();
+        const text = window.localStorage.getItem("inCart");
+        const matches = text.match(/id\d+-\d+/g);
+
+        matches.forEach((pair) => {
+          const [id, number] = pair.split("-");
+          addItemFirstTime(id, number);
+          getSubTotal(id, number);
+        });
+      } else {
+        let cart = document.getElementById("cart-menu");
+        cart.innerHTML = `
+     <p class="text-xs text-neutral-500 z-10">There is no Items in The Cart</p>`;
+      }
+      if (loadSc) {
+        loadSc.style.opacity = "0";
+
+        setTimeout(() => {
+          loadSc.style.display = "none";
+        }, 200);
+      }
+
+      document.querySelector(".map").style.display = "block";
+      setTimeout(() => {
+        document.querySelector(".overlay").style.opacity = "0";
+        setTimeout(() => {
+          document.querySelector(".overlay").style.display = "none";
+        }, 700);
+      }, 600);
+    };
+  </script>
+</html>

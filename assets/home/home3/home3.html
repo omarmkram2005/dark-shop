@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+
+    <title>Home 3</title>
+  </head>
+  <body class="relative">
+    <!-- load screen -->
+    <div
+      id="load"
+      class="load-screen flex items-center transition-all duration-200 w-[100%] h-[100%] z-[9998] fixed top-0 left-0 bg-[#2e2d2d]">
+      <div class="w-full h-fit my-auto mx-0 flex justify-center">
+        <div class="spinner w-16 rounded-full h-16"></div>
+      </div>
+    </div>
+    <!-- start nav bar -->
+    <nav class="h-fit" style="background-color: #171717">
+      <!-- the container -->
+
+      <div
+        class="container flex items-center pt-[30px] pb-[30px] justify-between"
+        style="height: 50px">
+        <!-- the logo div -->
+
+        <div class="logo h-6">
+          <img class="h-6" src="../../engage-shop-elegant-light.png" alt="" />
+        </div>
+
+        <!-- holder for all nav items -->
+
+        <div class="links-holder flex flex-row-reverse">
+          <!-- handel mobile menu state animations and transitions -->
+          <div
+            class="list-menu pl-4 cursor-pointer w-5"
+            id="mobile-menu"
+            onclick="mobileMenu()">
+            <svg
+              class="fill-slate-300 transition-all top-[13px] duration-200 absolute"
+              width="35"
+              height="39"
+              id="open-menu"
+              clip-rule="evenodd"
+              fill-rule="evenodd"
+              stroke-linejoin="round"
+              stroke-miterlimit="2"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m22 16.75c0-.414-.336-.75-.75-.75h-18.5c-.414 0-.75.336-.75.75s.336.75.75.75h18.5c.414 0 .75-.336.75-.75zm0-5c0-.414-.336-.75-.75-.75h-18.5c-.414 0-.75.336-.75.75s.336.75.75.75h18.5c.414 0 .75-.336.75-.75zm0-5c0-.414-.336-.75-.75-.75h-18.5c-.414 0-.75.336-.75.75s.336.75.75.75h18.5c.414 0 .75-.336.75-.75z"
+                fill-rule="nonzero" />
+            </svg>
+
+            <svg
+              class="fill-slate-300 top-[13px] transition-all duration-200 absolute"
+              id="close-menu"
+              style="transform: rotatex(90deg)"
+              width="35"
+              height="39"
+              clip-rule="evenodd"
+              fill-rule="evenodd"
+              stroke-linejoin="round"
+              stroke-miterlimit="2"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m12 10.93 5.719-5.72c.146-.146.339-.219.531-.219.404 0 .75.324.75.749 0 .193-.073.385-.219.532l-5.72 5.719 5.719 5.719c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.385-.073-.531-.219l-5.719-5.719-5.719 5.719c-.146.146-.339.219-.531.219-.401 0-.75-.323-.75-.75 0-.192.073-.384.22-.531l5.719-5.719-5.72-5.719c-.146-.147-.219-.339-.219-.532 0-.425.346-.749.75-.749.192 0 .385.073.531.219z" />
+            </svg>
+          </div>
+
+          <!-- handel  search and cart  -->
+          <div class="search cart flex cursor-pointer">
+            <div id="cart_handler" class="cart-holder relative mr-4">
+              <svg
+                id="cart"
+                class="relative fill-slate-300"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="30"
+                viewBox="0 0 24 24">
+                <path
+                  d="M20 7h-4v-3c0-2.209-1.791-4-4-4s-4 1.791-4 4v3h-4l-2 17h20l-2-17zm-11-3c0-1.654 1.346-3 3-3s3 1.346 3 3v3h-6v-3zm-4.751 18l1.529-13h2.222v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h6v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h2.222l1.529 13h-15.502z" />
+
+                <span
+                  id="amountBg"
+                  class="hidden text-white absolute bg-[#3ea8e6] w-5 h-5 rounded-full text-[19px] items-center justify-center top-[-8px] left-6">
+                  <span
+                    id="show-amount"
+                    style="
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%) scale(0.85);
+                    ">
+                    0
+                  </span>
+                </span>
+              </svg>
+              <ul
+                id="cart-menu"
+                class="transition-all hidden opacity-0 duration-700 z-[999999999999] bg-[#212121] rounded-lg pt-4 pb-6 px-5 w-[220px] text-nowrap text-xs unset absolute right-[-237%]"></ul>
+            </div>
+            <svg
+              class="fill-slate-200 pr-1"
+              id="search "
+              onclick="searchPros()"
+              width="41"
+              height="31"
+              clip-rule="evenodd"
+              fill-rule="evenodd"
+              stroke-linejoin="round"
+              stroke-miterlimit="2"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m15.97 17.031c-1.479 1.238-3.384 1.985-5.461 1.985-4.697 0-8.509-3.812-8.509-8.508s3.812-8.508 8.509-8.508c4.695 0 8.508 3.812 8.508 8.508 0 2.078-.747 3.984-1.985 5.461l4.749 4.75c.146.146.219.338.219.531 0 .587-.537.75-.75.75-.192 0-.384-.073-.531-.22zm-5.461-13.53c-3.868 0-7.007 3.14-7.007 7.007s3.139 7.007 7.007 7.007c3.866 0 7.007-3.14 7.007-7.007s-3.141-7.007-7.007-7.007z"
+                fill-rule="nonzero" />
+            </svg>
+            <!-- large screens nav -->
+          </div>
+          <ul id="lg-nav" class="links pr-4 items-center">
+            <li class="link pl-4 cursor-pointer relative" id="list_home">
+              <a href="../../../index.html">Home</a>
+              <ul
+                class="flex-col p-0 bg-[#262626] absolute rounded-md transition-all duration-700"
+                style="width: 180px; left: 0; display: none; opacity: 0"
+                id="list-home">
+                <li
+                  class="py-3 pl-[18px]"
+                  style="border-bottom: #606060 1px solid">
+                  <a class="decoration-0 text-xs" href="../../../index.html"
+                    >Home 1</a
+                  >
+                </li>
+                <li
+                  class="py-3 pl-[18px]"
+                  style="border-bottom: #606060 1px solid">
+                  <a class="decoration-0 text-xs" href="../home2/home2.html"
+                    >Home 2</a
+                  >
+                </li>
+                <li
+                  class="py-3 pl-[18px]"
+                  style="border-bottom: #606060 1px solid">
+                  <a class="decoration-0 text-xs" href="../home3/home3.html"
+                    >Home 3</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="link pl-4 cursor-pointer relative" id="list_shop">
+              <a href="../../shop/shop1/shop1.html">Shop</a>
+              <ul
+                class="flex-col p-0 bg-[#262626] absolute rounded-md transition-all duration-700"
+                style="width: 180px; left: 0; display: none; opacity: 0"
+                id="list-shop">
+                <li
+                  class="py-3 pl-[18px]"
+                  style="border-bottom: #606060 1px solid">
+                  <a
+                    class="decoration-0 text-xs"
+                    href="../../shop/shop1/shop1.html"
+                    >Shop with Sidebar</a
+                  >
+                </li>
+                <li
+                  class="py-3 pl-[18px]"
+                  style="border-bottom: #606060 1px solid">
+                  <a
+                    class="decoration-0 text-xs"
+                    href="../../shop/shop full width/shop full width.html"
+                    >Shop Fullwidth</a
+                  >
+                </li>
+                <li
+                  class="py-3 pl-[18px]"
+                  style="border-bottom: #606060 1px solid">
+                  <a
+                    class="decoration-0 text-xs"
+                    href="../../shop/shop one item/shop one item.html"
+                    >Single Product</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="link pl-4 cursor-pointer">
+              <a href="../../about/about/about.html">About</a>
+            </li>
+            <li class="link pl-4 cursor-pointer"><a href="#">Blog</a></li>
+            <li class="link pl-4 cursor-pointer">
+              <a href="../../Contact/contact/contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- mobile nav -->
+    <ul
+      id="mobile-nav"
+      class="links cursor-pointer bg-white hidden flex-col transition-all duration-500 px-3 overflow-hidden"
+      style="height: 0">
+      <li
+        class="link text-[#606060] h-[50px]"
+        onclick="mobileMenuSideSlider()"
+        id="homeItem">
+        <span id="spanHome">Home</span
+        ><i
+          class="fa-solid fa-chevron-right transition-all duration-300 text-sm"
+          id="arrow1"></i>
+      </li>
+      <ul
+        class="flex-col pl-4 overflow-hidden transition-all duration-300"
+        style="height: 0"
+        id="list1">
+        <li>
+          <a
+            class="decoration-0 text-sm text-[#606060]"
+            href="../../../index.html"
+            >Home 1</a
+          >
+        </li>
+        <li>
+          <a
+            class="decoration-0 text-sm text-[#606060]"
+            href="../home2/home2.html"
+            >Home 2</a
+          >
+        </li>
+        <li style="border-bottom: #606060 1px solid">
+          <a
+            class="decoration-0 text-sm text-[#606060]"
+            href="../home3/home3.html"
+            >Home 3</a
+          >
+        </li>
+      </ul>
+      <li
+        class="link text-[#606060] h-[50px]"
+        onclick="mobileMenuSideSlider()"
+        id="shopItem">
+        <span id="spanShop">Shop</span>
+        <i
+          class="fa-solid fa-chevron-right transition-all duration-300 text-sm"
+          id="arrow2">
+        </i>
+      </li>
+      <ul
+        class="flex-col pl-4 overflow-hidden transition-all duration-300"
+        style="height: 0"
+        id="list2">
+        <li>
+          <a
+            class="decoration-0 text-sm text-[#606060]"
+            href="../../shop/shop1/shop1.html"
+            >Shop with Sidebar</a
+          >
+        </li>
+        <li>
+          <a
+            class="decoration-0 text-sm text-[#606060]"
+            href="../../shop/shop full width/shop full width.html"
+            >Shop Fullwidth</a
+          >
+        </li>
+        <li style="border-bottom: #606060 1px solid">
+          <a
+            class="decoration-0 text-sm text-[#606060]"
+            href="../../shop/shop one item/shop one item.html"
+            >Single Product</a
+          >
+        </li>
+      </ul>
+      <li class="link text-[#606060] h-[50px]">
+        <a href="../../about/about/about.html">About</a>
+      </li>
+      <li class="link text-[#606060] h-[50px]"><a href="#">Blog</a></li>
+      <li class="link text-[#606060] h-[50px]">
+        <a href="../../Contact/contact/contact.html">Contact</a>
+      </li>
+    </ul>
+
+    <!-- start landing -->
+    <div class="landing">
+      <div class="container relative h-[920px]">
+        <div
+          class="overlay bg-black w-full h-full absolute top-0 left-0 opacity-40 z-[1]"></div>
+        <div
+          class="textContant text-center z-20"
+          style="
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            color: #e3e3e3;
+            max-width: 50%;
+          ">
+          <h3 class="" style="font-size: 26px">Welcome to</h3>
+          <h1 class="my-4" style="font-size: 66px">Dark Shop</h1>
+          <p class="mb-6" style="font-size: 26px">
+            We're the biggest, best equipped and most advanced Web Agency in the
+            greater Los Angeles area.
+          </p>
+          <button
+            class="py-[10px] px-[17px] text bg-slate-100 text-black rounded-md hover:bg-white transition-all duration-300">
+            Learn More
+          </button>
+        </div>
+        <span
+          id="spanCon"
+          class="w-8 rounded-2xl h-14 z-10 flex justify-center absolute bottom-[20px] left-[50%] translate-x-[-50%]"
+          style="border: 1px solid white; transform: translateX(-50%)">
+          <span
+            id="spanBall"
+            class="w-2 h-2 top-1 transition-all cursor-pointer duration-500 bg-white absolute rounded"
+            style="opacity: 0"></span>
+        </span>
+        <div
+          id="over"
+          class="a w-4 h-10 absolute cursor-pointer z-20 bottom-[20px] left-[50%]"></div>
+      </div>
+    </div>
+    <!-- end landing -->
+    <!-- start new arrivels -->
+    <div class="new-arrivels bg-[#171717] pb-20 pt-10 h-fit">
+      <div class="container h-fit flex flex-col">
+        <div class="text text-center max-w-[600px] mx-auto my-0 pb-16">
+          <h1 class="text-[32px] mt-6 mb-8 font-thin text-[#fff]">
+            New Arrivals
+          </h1>
+          <p class="text-[#606060]">
+            Faucibus dictum in eget metus. Duis suscipit elit sem, sed mattis
+            tellus accumsan eget. Quisque consequat venenatis rutrum. Quisque
+            posuere enim augue, in rhoncus diam dictum non. Etiam mollis
+            pulvinar nisl.
+          </p>
+        </div>
+        <div class="items-collection h-fit flex gap-2">
+          <div
+            data-id="id013"
+            class="box text-[#e3e3e3] relative max-h-[671.5px] max-w-[587.5px] grow basis-3/6">
+            <div class="image">
+              <img
+                class="h-full w-full"
+                src="../../shop/imgs/lily.jpg"
+                alt="" />
+              <div class="rate absolute top-1 left-2 text-[15px]">
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fa-regular fa-star" style="color: #555"></i>
+              </div>
+            </div>
+            <div
+              class="details relative z-10 pt-[15px] pr-[22px] pb-[12px] pl-[20px] bg-[#242424]">
+              <h3 class="a text-[14px] mb-2 text-white rounded-sm">
+                Lily Shirt
+              </h3>
+              <span class="text-sm">£20.00</span>
+              <span
+                class="add off transition-all opacity-0 duration-300 text-xs absolute cursor-pointer"
+                id="id013">
+                <span class="cursor-pointer">
+                  <svg
+                    class="absolute left-[-30px] bottom-0 text-slate-100 text-[8px] pr-1 fill-slate-100"
+                    id="cart"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24">
+                    <path
+                      d="M12.5 22h-9.5v-14h3v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h6v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h3v5.181c.482-.114.982-.181 1.5-.181l.5.025v-7.025h-5v-2c0-2.209-1.791-4-4-4s-4 1.791-4 4v2h-5v18h12.816c-.553-.576-1.004-1.251-1.316-2zm-5.5-18c0-1.654 1.346-3 3-3s3 1.346 3 3v2h-6v-2zm11.5 11c-2.484 0-4.5 2.015-4.5 4.5s2.016 4.5 4.5 4.5c2.482 0 4.5-2.015 4.5-4.5s-2.018-4.5-4.5-4.5zm2.5 5h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1z" /></svg></span
+                >add to cart</span
+              >
+            </div>
+            <div
+              class="view view-off p-2 z-0 cursor-pointer absolute text-center bg-[#242424] transition-all duration-300 hover:bg-[#3897cf] w-[100%]">
+              <h3>View Details</h3>
+            </div>
+          </div>
+          <div
+            data-id="id012"
+            class="box text-[#e3e3e3] relative max-h-[671.5px] max-w-[587.5px] grow basis-3/6">
+            <div class="image">
+              <img
+                class="h-full w-full"
+                src="../../shop/imgs/images04.jpg"
+                alt="" />
+              <div class="rate absolute top-1 left-2 text-[15px]">
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fa-regular fa-star" style="color: #555"></i>
+              </div>
+            </div>
+            <div
+              class="details relative z-10 pt-[15px] pr-[22px] pb-[12px] pl-[20px] bg-[#242424]">
+              <h3 class="a text-[14px] mb-2 text-white rounded-sm">
+                Light Shoes
+              </h3>
+              <span class="text-sm">£18.00</span>
+              <span
+                class="add off transition-all opacity-0 duration-300 text-xs absolute cursor-pointer"
+                id="id012">
+                <span class="cursor-pointer">
+                  <svg
+                    class="absolute left-[-30px] bottom-0 text-slate-100 text-[8px] pr-1 fill-slate-100"
+                    id="cart"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24">
+                    <path
+                      d="M12.5 22h-9.5v-14h3v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h6v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h3v5.181c.482-.114.982-.181 1.5-.181l.5.025v-7.025h-5v-2c0-2.209-1.791-4-4-4s-4 1.791-4 4v2h-5v18h12.816c-.553-.576-1.004-1.251-1.316-2zm-5.5-18c0-1.654 1.346-3 3-3s3 1.346 3 3v2h-6v-2zm11.5 11c-2.484 0-4.5 2.015-4.5 4.5s2.016 4.5 4.5 4.5c2.482 0 4.5-2.015 4.5-4.5s-2.018-4.5-4.5-4.5zm2.5 5h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1z" /></svg></span
+                >add to cart</span
+              >
+            </div>
+            <div
+              class="view view-off p-2 z-0 cursor-pointer absolute text-center bg-[#242424] transition-all duration-300 hover:bg-[#3897cf] w-[100%]">
+              <h3>View Details</h3>
+            </div>
+          </div>
+          <div
+            data-id="id004"
+            class="box text-[#e3e3e3] relative max-h-[671.5px] max-w-[587.5px] grow basis-3/6">
+            <div class="image">
+              <img class="h-full w-full" src="../imgs/images09.jpg" alt="" />
+              <div class="rate"></div>
+            </div>
+            <div
+              class="details relative z-10 pt-[15px] pr-[22px] pb-[12px] pl-[20px] bg-[#242424]">
+              <h3 class="a text-[14px] mb-2 text-white rounded-sm">
+                Brown Backpack
+              </h3>
+              <span class="text-sm">£15.00</span>
+              <span
+                class="add off transition-all opacity-0 duration-300 text-xs absolute cursor-pointer"
+                id="id004">
+                <span class="cursor-pointer">
+                  <svg
+                    class="absolute left-[-30px] bottom-0 text-slate-100 text-[8px] pr-1 fill-slate-100"
+                    id="cart"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24">
+                    <path
+                      d="M12.5 22h-9.5v-14h3v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h6v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h3v5.181c.482-.114.982-.181 1.5-.181l.5.025v-7.025h-5v-2c0-2.209-1.791-4-4-4s-4 1.791-4 4v2h-5v18h12.816c-.553-.576-1.004-1.251-1.316-2zm-5.5-18c0-1.654 1.346-3 3-3s3 1.346 3 3v2h-6v-2zm11.5 11c-2.484 0-4.5 2.015-4.5 4.5s2.016 4.5 4.5 4.5c2.482 0 4.5-2.015 4.5-4.5s-2.018-4.5-4.5-4.5zm2.5 5h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1z" /></svg></span
+                >add to cart</span
+              >
+            </div>
+            <div
+              class="view view-off p-2 z-0 cursor-pointer absolute text-center bg-[#242424] transition-all duration-300 hover:bg-[#3897cf] w-[100%]">
+              <h3>View Details</h3>
+            </div>
+          </div>
+          <div
+            data-id="id002"
+            class="box text-[#e3e3e3] relative max-h-[671.5px] max-w-[587.5px] grow basis-3/6">
+            <div class="image">
+              <img class="h-full w-full" src="../imgs/images05.jpg" alt="" />
+              <div class="rate absolute top-1 left-2 text-[15px]">
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star-half-alt" style="color: #555"></i>
+              </div>
+            </div>
+            <div
+              class="details relative z-10 pt-[15px] pr-[22px] pb-[12px] pl-[20px] bg-[#242424]">
+              <h3 class="a text-[14px] mb-2 text-white rounded-sm">
+                Beautiful Hat
+              </h3>
+              <span class="text-sm">£15.00</span>
+              <span
+                class="add off transition-all opacity-0 duration-300 text-xs absolute cursor-pointer"
+                id="id002">
+                <span class="cursor-pointer">
+                  <svg
+                    class="absolute left-[-30px] bottom-0 text-slate-100 text-[8px] pr-1 fill-slate-100"
+                    id="cart"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24">
+                    <path
+                      d="M12.5 22h-9.5v-14h3v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h6v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h3v5.181c.482-.114.982-.181 1.5-.181l.5.025v-7.025h-5v-2c0-2.209-1.791-4-4-4s-4 1.791-4 4v2h-5v18h12.816c-.553-.576-1.004-1.251-1.316-2zm-5.5-18c0-1.654 1.346-3 3-3s3 1.346 3 3v2h-6v-2zm11.5 11c-2.484 0-4.5 2.015-4.5 4.5s2.016 4.5 4.5 4.5c2.482 0 4.5-2.015 4.5-4.5s-2.018-4.5-4.5-4.5zm2.5 5h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1z" /></svg></span
+                >add to cart</span
+              >
+            </div>
+            <div
+              class="view view-off p-2 z-0 cursor-pointer absolute text-center bg-[#242424] transition-all duration-300 hover:bg-[#3897cf] w-[100%]">
+              <h3>View Details</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end new arrivels -->
+    <!-- start best sellers -->
+    <div class="best-sellers bg-[#1c1c1c] pb-20 pt-10 h-fit">
+      <div class="container h-fit flex flex-col">
+        <div class="text text-center max-w-[600px] mx-auto my-0 pb-16">
+          <h1 class="text-[32px] mt-6 mb-8 font-thin text-[#fff]">
+            Best Sellers
+          </h1>
+          <p class="text-[#606060]">
+            Faucibus dictum in eget metus. Duis suscipit elit sem, sed mattis
+            tellus accumsan eget. Quisque consequat venenatis rutrum. Quisque
+            posuere enim augue, in rhoncus diam dictum non. Etiam mollis
+            pulvinar nisl.
+          </p>
+        </div>
+        <div class="items-collection h-fit flex gap-2">
+          <div
+            data-id="id009"
+            class="box text-[#e3e3e3] relative max-h-[671.5px] max-w-[587.5px] grow basis-3/6">
+            <div class="image">
+              <img class="h-full w-full" src="../imgs/images10.jpg" alt="" />
+              <div class="rate absolute top-1 left-2 text-[15px]">
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fa-regular fa-star" style="color: #555"></i>
+              </div>
+            </div>
+            <div
+              class="details relative z-10 pt-[15px] pr-[22px] pb-[12px] pl-[20px] bg-[#242424]">
+              <h3 class="a text-[14px] mb-2 text-white rounded-sm">
+                Fancy Bag
+              </h3>
+              <span class="text-sm">£35.00</span>
+              <span
+                class="add off transition-all opacity-0 duration-300 text-xs absolute cursor-pointer"
+                id="id009">
+                <span class="cursor-pointer">
+                  <svg
+                    class="absolute left-[-30px] bottom-0 text-slate-100 text-[8px] pr-1 fill-slate-100"
+                    id="cart"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24">
+                    <path
+                      d="M12.5 22h-9.5v-14h3v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h6v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h3v5.181c.482-.114.982-.181 1.5-.181l.5.025v-7.025h-5v-2c0-2.209-1.791-4-4-4s-4 1.791-4 4v2h-5v18h12.816c-.553-.576-1.004-1.251-1.316-2zm-5.5-18c0-1.654 1.346-3 3-3s3 1.346 3 3v2h-6v-2zm11.5 11c-2.484 0-4.5 2.015-4.5 4.5s2.016 4.5 4.5 4.5c2.482 0 4.5-2.015 4.5-4.5s-2.018-4.5-4.5-4.5zm2.5 5h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1z" /></svg></span
+                >add to cart</span
+              >
+            </div>
+            <div
+              class="view view-off p-2 z-0 cursor-pointer absolute text-center bg-[#242424] transition-all duration-300 hover:bg-[#3897cf] w-[100%]">
+              <h3>View Details</h3>
+            </div>
+          </div>
+          <div
+            data-id="id003"
+            class="box text-[#e3e3e3] relative max-h-[671.5px] max-w-[587.5px] grow basis-3/6">
+            <div class="image">
+              <img
+                class="h-full w-full"
+                src="../imgs/images11 (1).jpg"
+                alt="" />
+              <div class="rate absolute top-1 left-2 text-[15px]">
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fa-regular fa-star" style="color: #555"></i>
+              </div>
+            </div>
+            <div
+              class="details relative z-10 pt-[15px] pr-[22px] pb-[12px] pl-[20px] bg-[#242424]">
+              <h3 class="a text-[14px] mb-2 text-white rounded-sm">
+                Beige Shorts
+              </h3>
+              <span class="text-sm">£35.00</span>
+              <span
+                class="add off transition-all opacity-0 duration-300 text-xs absolute cursor-pointer"
+                id="id003">
+                <span class="cursor-pointer">
+                  <svg
+                    class="absolute left-[-30px] bottom-0 text-slate-100 text-[8px] pr-1 fill-slate-100"
+                    id="cart"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24">
+                    <path
+                      d="M12.5 22h-9.5v-14h3v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h6v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h3v5.181c.482-.114.982-.181 1.5-.181l.5.025v-7.025h-5v-2c0-2.209-1.791-4-4-4s-4 1.791-4 4v2h-5v18h12.816c-.553-.576-1.004-1.251-1.316-2zm-5.5-18c0-1.654 1.346-3 3-3s3 1.346 3 3v2h-6v-2zm11.5 11c-2.484 0-4.5 2.015-4.5 4.5s2.016 4.5 4.5 4.5c2.482 0 4.5-2.015 4.5-4.5s-2.018-4.5-4.5-4.5zm2.5 5h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1z" /></svg></span
+                >add to cart</span
+              >
+            </div>
+            <div
+              class="view view-off p-2 z-0 cursor-pointer absolute text-center bg-[#242424] transition-all duration-300 hover:bg-[#3897cf] w-[100%]">
+              <h3>View Details</h3>
+            </div>
+          </div>
+          <div
+            data-id="id004"
+            class="box text-[#e3e3e3] relative max-h-[671.5px] max-w-[587.5px] grow basis-3/6">
+            <div class="image">
+              <img class="h-full w-full" src="../imgs/images09.jpg" alt="" />
+              <div class="rate"></div>
+            </div>
+            <div
+              class="details relative z-10 pt-[15px] pr-[22px] pb-[12px] pl-[20px] bg-[#242424]">
+              <h3 class="a text-[14px] mb-2 text-white rounded-sm">
+                Brown Backpack
+              </h3>
+              <span class="text-sm">£15.00</span>
+              <span
+                class="add off transition-all opacity-0 duration-300 text-xs absolute cursor-pointer"
+                id="id004">
+                <span class="cursor-pointer">
+                  <svg
+                    class="absolute left-[-30px] bottom-0 text-slate-100 text-[8px] pr-1 fill-slate-100"
+                    id="cart"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24">
+                    <path
+                      d="M12.5 22h-9.5v-14h3v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h6v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h3v5.181c.482-.114.982-.181 1.5-.181l.5.025v-7.025h-5v-2c0-2.209-1.791-4-4-4s-4 1.791-4 4v2h-5v18h12.816c-.553-.576-1.004-1.251-1.316-2zm-5.5-18c0-1.654 1.346-3 3-3s3 1.346 3 3v2h-6v-2zm11.5 11c-2.484 0-4.5 2.015-4.5 4.5s2.016 4.5 4.5 4.5c2.482 0 4.5-2.015 4.5-4.5s-2.018-4.5-4.5-4.5zm2.5 5h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1z" /></svg></span
+                >add to cart</span
+              >
+            </div>
+            <div
+              class="view view-off p-2 z-0 cursor-pointer absolute text-center bg-[#242424] transition-all duration-300 hover:bg-[#3897cf] w-[100%]">
+              <h3>View Details</h3>
+            </div>
+          </div>
+          <div
+            data-id="id007"
+            class="box text-[#e3e3e3] relative max-h-[671.5px] max-w-[587.5px] grow basis-3/6">
+            <div class="image">
+              <img class="h-full w-full" src="../imgs/images12.jpg" alt="" />
+              <span
+                class="sale absolute top-2 right-1 py-[5px] px-[20px] text-white bg-[#3ea8e6] font-bold">
+                SALE!</span
+              >
+              <div class="rate absolute top-1 left-2 text-[15px]">
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star-half-alt" style="color: #555"></i>
+              </div>
+            </div>
+            <div
+              class="details relative z-10 pt-[15px] pr-[22px] pb-[12px] pl-[20px] bg-[#242424]">
+              <h3 class="a text-[14px] mb-2 text-white rounded-sm">
+                Cool Glasses
+              </h3>
+              <span class="text-sm">£15.00</span>
+              <span
+                class="add off transition-all opacity-0 duration-300 text-xs absolute cursor-pointer"
+                id="id007">
+                <span class="cursor-pointer">
+                  <svg
+                    class="absolute left-[-30px] bottom-0 text-slate-100 text-[8px] pr-1 fill-slate-100"
+                    id="cart"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24">
+                    <path
+                      d="M12.5 22h-9.5v-14h3v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h6v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h3v5.181c.482-.114.982-.181 1.5-.181l.5.025v-7.025h-5v-2c0-2.209-1.791-4-4-4s-4 1.791-4 4v2h-5v18h12.816c-.553-.576-1.004-1.251-1.316-2zm-5.5-18c0-1.654 1.346-3 3-3s3 1.346 3 3v2h-6v-2zm11.5 11c-2.484 0-4.5 2.015-4.5 4.5s2.016 4.5 4.5 4.5c2.482 0 4.5-2.015 4.5-4.5s-2.018-4.5-4.5-4.5zm2.5 5h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1z" /></svg></span
+                >add to cart</span
+              >
+            </div>
+            <div
+              class="view view-off p-2 z-0 cursor-pointer absolute text-center bg-[#242424] transition-all duration-300 hover:bg-[#3897cf] w-[100%]">
+              <h3>View Details</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end best sellers -->
+    <!-- start old Classic -->
+    <div class="old Classic bg-[#171717] pb-20 pt-10 h-fit">
+      <div class="container h-fit flex flex-col">
+        <div class="text text-center max-w-[600px] mx-auto my-0 pb-16">
+          <h1 class="text-[32px] mt-6 mb-8 font-thin text-[#fff]">
+            Old Classic
+          </h1>
+          <p class="text-[#606060]">
+            Faucibus dictum in eget metus. Duis suscipit elit sem, sed mattis
+            tellus accumsan eget. Quisque consequat venenatis rutrum. Quisque
+            posuere enim augue, in rhoncus diam dictum non. Etiam mollis
+            pulvinar nisl.
+          </p>
+        </div>
+        <div class="items-collection h-fit flex gap-2">
+          <div
+            data-id="id001"
+            class="box text-[#e3e3e3] relative max-h-[671.5px] max-w-[587.5px] grow basis-3/6">
+            <div class="image">
+              <img
+                class="h-full w-full"
+                src="../../shop/imgs/images01 (1).jpg"
+                alt="" />
+              <div class="rate absolute top-1 left-2 text-[15px]">
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+              </div>
+            </div>
+            <div
+              class="details relative z-10 pt-[15px] pr-[22px] pb-[12px] pl-[20px] bg-[#242424]">
+              <h3 class="a text-[14px] mb-2 text-white rounded-sm">
+                Basic Sandals
+              </h3>
+              <span class="text-sm">£20.00</span>
+              <span
+                class="add off transition-all opacity-0 duration-300 text-xs absolute cursor-pointer"
+                id="id001">
+                <span class="cursor-pointer">
+                  <svg
+                    class="absolute left-[-30px] bottom-0 text-slate-100 text-[8px] pr-1 fill-slate-100"
+                    id="cart"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24">
+                    <path
+                      d="M12.5 22h-9.5v-14h3v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h6v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h3v5.181c.482-.114.982-.181 1.5-.181l.5.025v-7.025h-5v-2c0-2.209-1.791-4-4-4s-4 1.791-4 4v2h-5v18h12.816c-.553-.576-1.004-1.251-1.316-2zm-5.5-18c0-1.654 1.346-3 3-3s3 1.346 3 3v2h-6v-2zm11.5 11c-2.484 0-4.5 2.015-4.5 4.5s2.016 4.5 4.5 4.5c2.482 0 4.5-2.015 4.5-4.5s-2.018-4.5-4.5-4.5zm2.5 5h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1z" /></svg></span
+                >add to cart</span
+              >
+            </div>
+            <div
+              class="view view-off p-2 z-0 cursor-pointer absolute text-center bg-[#242424] transition-all duration-300 hover:bg-[#3897cf] w-[100%]">
+              <h3>View Details</h3>
+            </div>
+          </div>
+          <div
+            data-id="id012"
+            class="box text-[#e3e3e3] relative max-h-[671.5px] max-w-[587.5px] grow basis-3/6">
+            <div class="image">
+              <img
+                class="h-full w-full"
+                src="../../shop/imgs/images04.jpg"
+                alt="" />
+              <div class="rate absolute top-1 left-2 text-[15px]">
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fa-regular fa-star" style="color: #555"></i>
+              </div>
+            </div>
+            <div
+              class="details relative z-10 pt-[15px] pr-[22px] pb-[12px] pl-[20px] bg-[#242424]">
+              <h3 class="a text-[14px] mb-2 text-white rounded-sm">
+                Light Shoes
+              </h3>
+              <span class="text-sm">£18.00</span>
+              <span
+                class="add off transition-all opacity-0 duration-300 text-xs absolute cursor-pointer"
+                id="id012">
+                <span class="cursor-pointer">
+                  <svg
+                    class="absolute left-[-30px] bottom-0 text-slate-100 text-[8px] pr-1 fill-slate-100"
+                    id="cart"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24">
+                    <path
+                      d="M12.5 22h-9.5v-14h3v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h6v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h3v5.181c.482-.114.982-.181 1.5-.181l.5.025v-7.025h-5v-2c0-2.209-1.791-4-4-4s-4 1.791-4 4v2h-5v18h12.816c-.553-.576-1.004-1.251-1.316-2zm-5.5-18c0-1.654 1.346-3 3-3s3 1.346 3 3v2h-6v-2zm11.5 11c-2.484 0-4.5 2.015-4.5 4.5s2.016 4.5 4.5 4.5c2.482 0 4.5-2.015 4.5-4.5s-2.018-4.5-4.5-4.5zm2.5 5h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1z" /></svg></span
+                >add to cart</span
+              >
+            </div>
+            <div
+              class="view view-off p-2 z-0 cursor-pointer absolute text-center bg-[#242424] transition-all duration-300 hover:bg-[#3897cf] w-[100%]">
+              <h3>View Details</h3>
+            </div>
+          </div>
+          <div
+            data-id="id006"
+            class="box text-[#e3e3e3] relative max-h-[671.5px] max-w-[587.5px] grow basis-3/6">
+            <div class="image">
+              <img
+                class="h-full w-full"
+                src="../../shop/imgs/color.jpg"
+                alt="" />
+              <div class="rate absolute top-1 left-2 text-[15px]">
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+              </div>
+            </div>
+            <div
+              class="details relative z-10 pt-[15px] pr-[22px] pb-[12px] pl-[20px] bg-[#242424]">
+              <h3 class="a text-[14px] mb-2 text-white rounded-sm">
+                Color Bag
+              </h3>
+              <span class="text-sm">£35.00</span>
+              <span
+                class="add off transition-all opacity-0 duration-300 text-xs absolute cursor-pointer"
+                id="id006">
+                <span class="cursor-pointer">
+                  <svg
+                    class="absolute left-[-30px] bottom-0 text-slate-100 text-[8px] pr-1 fill-slate-100"
+                    id="cart"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24">
+                    <path
+                      d="M12.5 22h-9.5v-14h3v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h6v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h3v5.181c.482-.114.982-.181 1.5-.181l.5.025v-7.025h-5v-2c0-2.209-1.791-4-4-4s-4 1.791-4 4v2h-5v18h12.816c-.553-.576-1.004-1.251-1.316-2zm-5.5-18c0-1.654 1.346-3 3-3s3 1.346 3 3v2h-6v-2zm11.5 11c-2.484 0-4.5 2.015-4.5 4.5s2.016 4.5 4.5 4.5c2.482 0 4.5-2.015 4.5-4.5s-2.018-4.5-4.5-4.5zm2.5 5h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1z" /></svg></span
+                >add to cart</span
+              >
+            </div>
+            <div
+              class="view view-off p-2 z-0 cursor-pointer absolute text-center bg-[#242424] transition-all duration-300 hover:bg-[#3897cf] w-[100%]">
+              <h3>View Details</h3>
+            </div>
+          </div>
+          <div
+            data-id="id009"
+            class="box text-[#e3e3e3] relative max-h-[671.5px] max-w-[587.5px] grow basis-3/6">
+            <div class="image">
+              <img class="h-full w-full" src="../imgs/images10.jpg" alt="" />
+              <div class="rate absolute top-1 left-2 text-[15px]">
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star" style="color: #555"></i>
+                <i class="fas fa-star-half-alt" style="color: #555"></i>
+              </div>
+            </div>
+            <div
+              class="details relative z-10 pt-[15px] pr-[22px] pb-[12px] pl-[20px] bg-[#242424]">
+              <h3 class="a text-[14px] mb-2 text-white rounded-sm">
+                Fancy Bag
+              </h3>
+              <span class="text-sm">£35.00</span>
+              <span
+                class="add off transition-all opacity-0 duration-300 text-xs absolute cursor-pointer"
+                id="id009">
+                <span class="cursor-pointer">
+                  <svg
+                    class="absolute left-[-30px] bottom-0 text-slate-100 text-[8px] pr-1 fill-slate-100"
+                    id="cart"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24">
+                    <path
+                      d="M12.5 22h-9.5v-14h3v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h6v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h3v5.181c.482-.114.982-.181 1.5-.181l.5.025v-7.025h-5v-2c0-2.209-1.791-4-4-4s-4 1.791-4 4v2h-5v18h12.816c-.553-.576-1.004-1.251-1.316-2zm-5.5-18c0-1.654 1.346-3 3-3s3 1.346 3 3v2h-6v-2zm11.5 11c-2.484 0-4.5 2.015-4.5 4.5s2.016 4.5 4.5 4.5c2.482 0 4.5-2.015 4.5-4.5s-2.018-4.5-4.5-4.5zm2.5 5h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1z" /></svg></span
+                >add to cart</span
+              >
+            </div>
+            <div
+              class="view view-off p-2 z-0 cursor-pointer absolute text-center bg-[#242424] transition-all duration-300 hover:bg-[#3897cf] w-[100%]">
+              <h3>View Details</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end old Classic -->
+    <!-- start sec section -->
+    <div class="sec-section bg-[#1C1C1C]">
+      <div
+        class="container gap-20 holder max-h-[867px] px-[36px] py-[90px] flex flex-row justify-between items-center">
+        <div class="right-part max-h-[452px] max-w-[670px]"></div>
+
+        <div class="left-part">
+          <div class="lift-container text-sm gap-5 mb-0 mt-0 mr-auto ml-auto">
+            <h2 class="leading-10 text-[32px] mt-6 mb-6 text-[#e3e3e3]">
+              New arrivals every week.
+            </h2>
+            <p class="text-[#999] leading-8">
+              We have been operating for over 30 years and are Members of The
+              Federation of Master Builders. We work on projects big and small
+              from small residential extensions to full house and commercial
+              builds and we are registered NHBC house builders.
+            </p>
+            <ul class="icon flex flex-col mt-5">
+              <li class="point relative pl-7 my-5 text-[#999]">
+                Aliquam fermentum lorem quis posuere mattis.
+              </li>
+              <li class="point relative pl-7 my-5 text-[#999]">
+                Sed mollis sapien erat id pellentesque libero.
+              </li>
+              <li class="point relative pl-7 my-5 text-[#999]">
+                Pellentesque nisl id semper bibendum.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="th-section">
+      <div
+        class="container max-h-[867px] gap-20 holder px-[36px] py-[90px] flex flex-row justify-between items-center bg-[#171717]">
+        <div class="left-part">
+          <div class="lift-container text-sm mb-0 mt-0 mr-auto ml-auto">
+            <h2 class="text-[32px] mt-6 mb-6 text-[#e3e3e3]">Summer Sale.</h2>
+            <p class="text-[#999] leading-8">
+              We have been operating for over 30 years and are Members of The
+              Federation of Master Builders. We work on projects big and small
+              from small residential extensions to full house and commercial
+              builds and we are registered NHBC house builders.
+            </p>
+            <ul class="icon flex flex-col mt-5">
+              <li class="point relative pl-7 my-5 text-[#999]">
+                Aliquam fermentum lorem quis posuere mattis.
+              </li>
+              <li class="point relative pl-7 my-5 text-[#999]">
+                Sed mollis sapien erat id pellentesque libero.
+              </li>
+              <li class="point relative pl-7 my-5 text-[#999]">
+                Pellentesque nisl id semper bibendum.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="right-part max-h-[452px] max-w-[6700px]"></div>
+      </div>
+    </div>
+
+    <!-- end sec section -->
+    <!-- start why  -->
+    <div class="why-our-store h-fit bg-[#1c1c1c] pb-20 pt-10">
+      <div class="container flex h-fit flex-col">
+        <div class="text text-center max-w-80 mx-auto my-0 pb-16">
+          <h1 class="text-[32px] mt-6 mb-8 font-thin text-[#fff]">
+            Why our store?
+          </h1>
+          <p class="text-[#606060]">
+            Faucibus dictum in eget metus. Duis suscipit elit sem, sed mattis
+            tellus accumsan eget. Quisque consequat venenatis rutrum. Quisque
+            posuere enim augue, in rhoncus diam dictum non. Etiam mollis
+            pulvinar nisl.
+          </p>
+        </div>
+        <div
+          class="items-collection h-fit flex flex-wrap justify-center items-center gap-10">
+          <div class="item flex justify-between">
+            <div class="icon-container">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24">
+                <path
+                  d="M6 16h-6v-3h6v3zm-2-5v-10h-2v10h2zm-2 7v5h2v-5h-2zm13-7h-6v-3h6v3zm-2-5v-5h-2v5h2zm-2 7v10h2v-10h-2zm13 3h-6v-3h6v3zm-2-5v-10h-2v10h2zm-2 7v5h2v-5h-2z" />
+              </svg>
+            </div>
+            <div class="conant-container">
+              <h2 class="text-white mb-4">Powerful Options</h2>
+              <p class="text-[#999] text-xs">
+                Take a full control over all aspects of your theme with our
+                truly extensive Options Panel.
+              </p>
+            </div>
+          </div>
+          <div class="item flex justify-between">
+            <div class="icon-container">
+              <svg
+                width="24"
+                height="24"
+                xmlns="http://www.w3.org/2000/svg"
+                fill-rule="evenodd"
+                clip-rule="evenodd">
+                <path
+                  d="M17 24h-10v-1.342c1.808-.985 2.005-2.205 2-3.658h-8c-.265 0-.52-.105-.707-.293-.188-.187-.293-.442-.293-.707v-17c0-.265.105-.52.293-.707.187-.188.442-.293.707-.293h22c.265 0 .52.105.707.293.188.187.293.442.293.707v17c0 .265-.105.52-.293.707-.187.188-.442.293-.707.293h-8c.004 1.374.155 2.66 2 3.658v1.342zm-3.984-5h-2.044c-.015.802.004 2.003-.719 3h3.493c-.757-1.02-.716-2.25-.73-3zm8.984-5h-20v3h20v-3zm-10 .537c.552 0 1 .448 1 1s-.448 1-1 1-1-.448-1-1 .448-1 1-1zm-10-12.537v10h20v-10h-20z" />
+              </svg>
+            </div>
+            <div class="conant-container">
+              <h2 class="text-white mb-4">Responsive Design</h2>
+              <p class="text-[#999] text-xs">
+                Engage is a fully responsive and retina ready theme that scales
+                well to all mobile devices.
+              </p>
+            </div>
+          </div>
+          <div class="item flex justify-between">
+            <div class="icon-container">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24">
+                <path
+                  d="M14.078 4.232l-12.64 12.639-1.438 7.129 7.127-1.438 12.641-12.64-5.69-5.69zm-10.369 14.893l-.85-.85 11.141-11.125.849.849-11.14 11.126zm2.008 2.008l-.85-.85 11.141-11.125.85.85-11.141 11.125zm18.283-15.444l-2.816 2.818-5.691-5.691 2.816-2.816 5.691 5.689z" />
+              </svg>
+            </div>
+            <div class="conant-container">
+              <h2 class="text-white mb-4">Satisfied Clients</h2>
+              <p class="text-[#999] text-xs">
+                Build any layout you can think of with the most powerful page
+                builder Visual Composer.
+              </p>
+            </div>
+          </div>
+          <div class="item flex justify-between">
+            <div class="icon-container">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24">
+                <path
+                  d="M10.252 23h-3.21c-.612 0-1.157-.427-1.354-1.007l-1.591-4.993h4.615l.918 3.171c.178.552.512 1.041.962 1.408.758.618.271 1.421-.34 1.421zm9.286-21.902c-1.522.617-4.525 3.739-8.252 4.639-.802 1.099-1.285 2.882-1.285 4.846 0 1.861.438 3.553 1.165 4.662 3.941.942 6.303 3.996 8.309 4.671 2.201.742 4.529-3.468 4.525-9.422-.003-5.959-2.471-10.202-4.462-9.396zm1.704 15.472c-.719 1.656-1.987 1.685-2.72.001-.436-1.002-.731-2.772-.892-3.961h.38c1.174 0 2.125-.954 2.125-2.131s-.951-2.132-2.125-2.132h-.39c.16-1.21.538-2.947.974-3.89.764-1.652 1.941-1.68 2.72-.001 1.315 2.838 1.368 8.794-.072 12.114zm-12.435-1.57h-4.371c-2.452 0-4.436-2.047-4.436-4.5s1.984-4.5 4.436-4.5h4.444c-.561 1.3-.876 2.887-.876 4.594 0 1.627.29 3.141.803 4.406z" />
+              </svg>
+            </div>
+            <div class="conant-container">
+              <h2 class="text-white mb-4">Demo Content</h2>
+              <p class="text-[#999] text-xs">
+                All of presented layouts and theme demo pages are available with
+                a single mouse click.
+              </p>
+            </div>
+          </div>
+          <div class="item flex justify-between">
+            <div class="icon-container">
+              <svg
+                width="24"
+                height="24"
+                xmlns="http://www.w3.org/2000/svg"
+                fill-rule="evenodd"
+                clip-rule="evenodd">
+                <path
+                  d="M12 1c-6.338 0-12 4.226-12 10.007 0 2.05.739 4.063 2.047 5.625l-1.993 6.368 6.946-3c1.705.439 3.334.641 4.864.641 7.174 0 12.136-4.439 12.136-9.634 0-5.812-5.701-10.007-12-10.007m0 1c6.065 0 11 4.041 11 9.007 0 4.922-4.787 8.634-11.136 8.634-1.881 0-3.401-.299-4.946-.695l-5.258 2.271 1.505-4.808c-1.308-1.564-2.165-3.128-2.165-5.402 0-4.966 4.935-9.007 11-9.007" />
+              </svg>
+            </div>
+            <div class="conant-container">
+              <h2 class="text-white mb-4">Free Support</h2>
+              <p class="text-[#999] text-xs">
+                Our top-notch support team will be more than happy to answer any
+                of your questions.
+              </p>
+            </div>
+          </div>
+          <div class="item flex justify-between">
+            <div class="icon-container">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24">
+                <path
+                  d="M7 16h13v1h-13v-1zm13-3h-13v1h13v-1zm0-6h-5v1h5v-1zm0 3h-5v1h5v-1zm-17-8v17.199c0 .771-1 .771-1 0v-15.199h-2v15.98c0 1.115.905 2.02 2.02 2.02h19.958c1.117 0 2.022-.904 2.022-2.02v-17.98h-21zm19 17h-17v-15h17v15zm-9-12h-6v4h6v-4z" />
+              </svg>
+            </div>
+            <div class="conant-container">
+              <h2 class="text-white mb-4">Documentation</h2>
+              <p class="text-[#999] text-xs">
+                All of presented layouts and theme demo pages are available with
+                a single mouse click.
+              </p>
+            </div>
+          </div>
+          <div class="item flex justify-between">
+            <div class="icon-container">
+              <svg
+                width="24"
+                height="24"
+                xmlns="http://www.w3.org/2000/svg"
+                fill-rule="evenodd"
+                clip-rule="evenodd">
+                <path
+                  d="M15.668 8.626l8.332 1.159-6.065 5.874 1.48 8.341-7.416-3.997-7.416 3.997 1.481-8.341-6.064-5.874 8.331-1.159 3.668-7.626 3.669 7.626zm-6.67.925l-6.818.948 4.963 4.807-1.212 6.825 6.068-3.271 6.069 3.271-1.212-6.826 4.964-4.806-6.819-.948-3.002-6.241-3.001 6.241z" />
+              </svg>
+            </div>
+            <div class="conant-container">
+              <h2 class="text-white mb-4">Google Fonts</h2>
+              <p class="text-[#999] text-xs">
+                You may choose any font from the extensive Google Fonts library
+                with a single mouse click.
+              </p>
+            </div>
+          </div>
+          <div class="item flex justify-between">
+            <div class="icon-container">
+              <svg
+                width="24"
+                height="24"
+                xmlns="http://www.w3.org/2000/svg"
+                fill-rule="evenodd"
+                clip-rule="evenodd">
+                <path
+                  d="M24 22h-24v-20h24v20zm-1-19h-22v18h22v-18zm-1 16h-19l4-7.492 3 3.048 5.013-7.556 6.987 12zm-11.848-2.865l-2.91-2.956-2.574 4.821h15.593l-5.303-9.108-4.806 7.243zm-4.652-11.135c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5zm0 1c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5z" />
+              </svg>
+            </div>
+            <div class="conant-container">
+              <h2 class="text-white mb-4">Premium Sliders</h2>
+              <p class="text-[#999] text-xs">
+                Engage comes with two most powerful sliders out there:
+                Revolution Slider and Layer Slider.
+              </p>
+            </div>
+          </div>
+          <div class="item flex justify-between">
+            <div class="icon-container">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24">
+                <path
+                  d="M18 1h-11.916l-6.084 7 12 15 12-14.917-6-7.083zm-11.667 8l3.231 7.753-6.203-7.753h2.972zm9.167 0l-3.5 8.4-3.5-8.4h7zm-6.365-2l2.865-3.438 2.865 3.438h-5.73zm8.532 2h3.028l-6.283 7.811 3.255-7.811zm2.794-2h-2.992l-3.334-4h2.938l3.388 4zm-13.465-4h2.869l-3.334 4h-3.011l3.476-4z" />
+              </svg>
+            </div>
+            <div class="conant-container">
+              <h2 class="text-white mb-4">Styling Options</h2>
+              <p class="text-[#999] text-xs">
+                Adjust the looks of your theme with the extensive Styling panel.
+                Possibilities are endless.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end why  -->
+    <!-- start visit shop -->
+    <div class="visit-shop block relative overflow-hidden">
+      <div class="overlay absolute w-[101%] h-full bg-black opacity-80"></div>
+      <div
+        class="container h-full flex items-center justify-center text-center">
+        <div class="visit max-w-[450px] relative opacity-100">
+          <h1 class="mb-8 text-white text-[36px]">Feeling convinced?</h1>
+          <p class="text-white text-[20px] mb-6">
+            I am a subtitle, feel free to change me!--No
+          </p>
+          <button
+            onclick="window.location.assign(`../../shop/shop1/shop1.html`)"
+            class="text-white mix-blend-normal text-[15px] font-bold border py-[20px] px-[28px] rounded hover:bg-[#FFFFFF] hover:text-black transition-all duration-500">
+            Visit Shop
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- end visit shop -->
+    <!-- start higher footer -->
+    <div class="h-footer">
+      <div class="container h-fit py-10 flex gap-[1.3%]">
+        <div class="col-1 px-[14px]">
+          <h2 class="text-white mb-4 text-lg">About us</h2>
+          <p class="text-[#797979] leading-6 text-sm pb-9">
+            I am text block. Click edit button to change this text. Lorem ipsum
+            dolor sit amet, consectetur. I am text block. Click edit button to
+            change this text. Lorem ipsum dolor sit amet, consectetur.
+          </p>
+          <p class="text-[#797979] leading-6 text-sm">
+            We are the champions! We are the most amazing theme of all time,
+            yeah.
+          </p>
+        </div>
+        <div class="col-2 px-[14px]">
+          <h2 class="text-white mb-4 text-lg">Opening Hours</h2>
+          <ul class="list Hours">
+            <li>Monday 10AM – 9PM</li>
+            <li>Tuesday 10AM – 9PM</li>
+            <li>Wednesday 10AM – 9PM</li>
+            <li>Thursday 10AM – 10PM</li>
+            <li>Friday 10AM – 10PM</li>
+            <li>Weekends 10AM – 11PM</li>
+          </ul>
+        </div>
+        <div class="col-3 px-[14px]">
+          <h2 class="text-white mb-4 text-lg">Top Rated Products</h2>
+
+          <div data-id="id001" class="row flex justify-between">
+            <span class="hidden" id="id001"></span>
+            <div class="info flex justify-around flex-col">
+              <h3 class="name mb-3">
+                <a
+                  class="text-[#A9A9A9] transition-all duration-500 hover:text-[#cac9c9]"
+                  href="#"
+                  >Basic Sandals</a
+                >
+              </h3>
+              <div class="rate text-xs mb-3">
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="far fa-star" style="color: #3ea8e6"></i>
+              </div>
+              <span class="text-[#797979]">£20.00</span>
+            </div>
+            <div class="image flex items-center w-16">
+              <img
+                class="rounded"
+                src="../../shop/imgs/images01 (1).jpg"
+                alt="" />
+            </div>
+          </div>
+          <div data-id="id012" class="row flex justify-between">
+            <span class="hidden" id="id012"></span>
+            <div class="info flex justify-around flex-col">
+              <h3 class="name mb-3">
+                <a
+                  class="text-[#A9A9A9] transition-all duration-500 hover:text-[#cac9c9]"
+                  href="#"
+                  >Light Shoes
+                </a>
+              </h3>
+              <div class="rate text-xs mb-3">
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="far fa-star" style="color: #3ea8e6"></i>
+              </div>
+              <span class="text-[#797979]">£18.00</span>
+            </div>
+            <div class="image flex items-center w-16">
+              <img class="rounded" src="../../shop/imgs/images04.jpg" alt="" />
+            </div>
+          </div>
+          <div data-id="id014" class="row flex justify-between">
+            <span class="hidden" id="id014"></span>
+            <div class="info flex justify-around flex-col">
+              <h3 class="name mb-3">
+                <a
+                  class="text-[#A9A9A9] transition-all duration-500 hover:text-[#cac9c9]"
+                  href="#"
+                  >White Bag
+                </a>
+              </h3>
+              <div class="rate text-xs mb-3">
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+                <i class="fas fa-star" style="color: #3ea8e6"></i>
+              </div>
+              <span class="text-[#797979]">£35.00</span>
+            </div>
+            <div class="image flex items-center w-16">
+              <img class="rounded" src="../../shop/imgs/images13.jpg" alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="col-4 px-[14px]">
+          <ul class="list cont">
+            <h2 class="text-white mb-4 text-lg">Contact Details</h2>
+            <li class="text-xs">
+              <i class="fas fa-map-marker-alt"></i>
+              Manchester Road 123-78B, Silictown 7854MD, Great Country
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <a
+                class="text-[#A9A9A9] transition-all duration-500 hover:text-[#cac9c9]"
+                href="#">
+                +46 123 456 789
+              </a>
+            </li>
+            <li class="email">
+              <i class="fas fa-envelope"></i>
+              <a
+                class="text-[#A9A9A9] transition-all duration-500 hover:text-[#cac9c9]"
+                href="mailto:hello@sitename.com"
+                >hello@sitename.com</a
+              >
+            </li>
+            <li class="globe">
+              <i class="fas fa-globe"></i>
+              <a
+                class="text-[#A9A9A9] transition-all duration-500 hover:text-[#cac9c9]"
+                href="#"
+                >http://www.sitename.com</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- end higher footer -->
+    <!-- start lower footer -->
+    <div class="l-footer bg-[#141414]">
+      <div
+        class="container h-fit py-[20px] flex gap-3 justify-between items-center">
+        <span class="text-[#777777] text-xs"
+          >Copyright 2024. All rights reserved.
+        </span>
+        <div
+          class="social flex gap-4 text-[#c3c3c3] justify-between items-center">
+          <div
+            class="bg-[#0e0d0d] hover:bg-[#1877F2] transition-all duration-500 rounded-full w-6 h-6 flex justify-center items-center">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+          </div>
+          <div
+            class="bg-[#0e0d0d] hover:bg-[#EA4335] transition-all duration-500 rounded-full w-6 h-6 flex justify-center items-center">
+            <a href="#"><i class="fab fa-google"></i></a>
+          </div>
+          <div
+            class="bg-[#0e0d0d] hover:bg-[#0A66C2] transition-all duration-500 rounded-full w-6 h-6 flex justify-center items-center">
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+          <div
+            class="bg-[#0e0d0d] hover:bg-[#1DA1F2] transition-all duration-500 rounded-full w-6 h-6 flex justify-center items-center">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end lower footer -->
+    <!-- jump to top button -->
+    <div
+      class="jump fixed right-2 duration-500 transition-all z-[1000] bottom-2 rounded-full">
+      <span
+        class="flex justify-center border cursor-pointer items-center rounded-full w-8 h-8 p-6 text-white text-xl -rotate-90 bg-[#0000005b]"
+        >></span
+      >
+    </div>
+
+    <!-- call tailwind -->
+    <script src="../../tailwind.config.js"></script>
+    <script src="script.js"></script>
+  </body>
+  <script>
+    window.onload = function () {
+      let loadSc = document.getElementById("load");
+      if (window.localStorage.getItem("inCart")) {
+        addButtons();
+        const text = window.localStorage.getItem("inCart");
+        const matches = text.match(/id\d+-\d+/g);
+
+        matches.forEach((pair) => {
+          const [id, number] = pair.split("-");
+          addItemFirstTime(id, number);
+          getSubTotal(id, number);
+        });
+      } else {
+        let cart = document.getElementById("cart-menu");
+        cart.innerHTML = `
+     <p class="text-xs text-neutral-500 z-10">There is no Items in The Cart</p>`;
+      }
+      if (loadSc) {
+        loadSc.style.opacity = "0";
+
+        setTimeout(() => {
+          loadSc.style.display = "none";
+        }, 200);
+      }
+    };
+  </script>
+</html>
